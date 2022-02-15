@@ -33,7 +33,7 @@ const StyledLink = styled(Link)`
 `
 
 const List = () => {
-  const data = useSelector((state) => state.words.words);
+  const data = useSelector((state) => state.words);
   const words = data.map((word) => <Card word={word} key={word.id} />);
   return (
     <>

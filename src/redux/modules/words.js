@@ -8,11 +8,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase";
-import { createAction } from "@reduxjs/toolkit";
-
-const initialState = {
-  words: [],
-};
+import { createAction, createReducer } from "@reduxjs/toolkit";
 
 const loadWords = createAction("LOAD");
 const createWord = createAction("CREATE");
@@ -56,25 +52,21 @@ export const deleteWordFB = (id) => {
   };
 };
 
-export default function reducer(state = initialState, action = {}) {
+export default function reducer(state = [], action = {}) {
   switch (action.type) {
     case loadWords.type:
-      return { words: action.payload };
+      return action.payload;
 
     case createWord.type:
-      return { words: [...state.words, action.payload] };
+      return [...state, action.payload];
 
     case updateWord.type:
-      return {
-        words: state.words.map((word) =>
-          word.id === action.payload.id ? action.payload : word
-        ),
-      };
+      return state.map((word) =>
+        word.id === action.payload.id ? action.payload : word
+      );
 
     case deleteWord.type:
-      return {
-        words: state.words.filter((word) => word.id !== action.payload),
-      };
+      return state.filter((word) => word.id !== action.payload);
 
     default:
       return state;
