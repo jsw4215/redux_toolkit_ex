@@ -8,31 +8,16 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase";
-
-const LOAD = "word/LOAD";
-const CREATE = "word/CREATE";
-const UPDATE = "word/UPDATE";
-const DELETE = "word/DELETE";
+import { createAction } from "@reduxjs/toolkit";
 
 const initialState = {
   words: [],
 };
 
-export const loadWords = (words) => {
-  return { type: LOAD, words };
-};
-
-export const createWord = (word) => {
-  return { type: CREATE, word };
-};
-
-export const updateWord = (word) => {
-  return { type: UPDATE, word};
-};
-
-export const deleteWord = (wordId) => {
-  return { type: DELETE, wordId };
-};
+const loadWords = createAction("LOAD");
+const createWord = createAction("CREATE");
+const updateWord = createAction("UPDATE");
+const deleteWord = createAction("DELETE");
 
 export const loadWordsFB = () => {
   return async (dispatch) => {
@@ -73,21 +58,23 @@ export const deleteWordFB = (id) => {
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case "word/LOAD":
-      return { words: action.words };
+    case loadWords.type:
+      return { words: action.payload };
 
-    case "word/CREATE":
-      return { words: [...state.words, action.word] };
+    case createWord.type:
+      return { words: [...state.words, action.payload] };
 
-    case "word/UPDATE":
+    case updateWord.type:
       return {
         words: state.words.map((word) =>
-          word.id === action.word.id ? action.word : word
+          word.id === action.payload.id ? action.payload : word
         ),
       };
 
-    case "word/DELETE":
-      return { words: state.words.filter((word) => word.id !== action.wordId) };
+    case deleteWord.type:
+      return {
+        words: state.words.filter((word) => word.id !== action.payload),
+      };
 
     default:
       return state;
