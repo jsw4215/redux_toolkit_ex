@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { updateWordFB } from "../redux/modules/words";
+import { updateFB } from "../redux/modules/words";
 
 const Wrapper = styled.div`
   margin-top: 500px;
@@ -77,7 +77,7 @@ const UpdateWord = () => {
       example: example.current.value,
       timeStamp: locationState.timeStamp,
     };
-    dispatch(updateWordFB(updatedWord, locationState.id));
+    dispatch(updateFB(updatedWord, locationState.id));
     navigate("/");
   };
   return (

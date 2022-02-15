@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { createWordFB } from "../redux/modules/words";
+import { createFB } from "../redux/modules/words";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -74,7 +74,7 @@ const AddWord = () => {
       example: example.current.value,
       timeStamp: Date.now(),
     };
-    dispatch(createWordFB(newWord));
+    dispatch(createFB(newWord));
     navigate("/");
   };
   return (

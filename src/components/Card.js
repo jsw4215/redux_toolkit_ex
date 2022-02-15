@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { deleteWordFB } from "../redux/modules/words";
+import { deleteFB } from "../redux/modules/words";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { RiDeleteBin7Line, RiEditBoxLine } from "react-icons/ri";
@@ -66,7 +66,7 @@ const Card = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const deleteWord = (id) => {
-    dispatch(deleteWordFB(id));
+    dispatch(deleteFB(id));
   };
   return (
     <StyledCard>

@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { loadWordsFB } from "./redux/modules/words";
+import { useDispatch, useSelector } from "react-redux";
+import { loadFB, loadWordsFB } from "./redux/modules/words";
 import AddWord from "./components/AddWord";
 import List from "./components/List";
 import UpdateWord from "./components/UpdateWord";
@@ -35,8 +35,12 @@ const Header = styled.h1`
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(loadWordsFB());
+    dispatch(loadFB())
   }, [dispatch]);
+  const data = useSelector((state) => state.words.status);
+  if (data === 'loading') {
+    return <h1>Loading</h1>
+  }
   return (
     <>
       <GlobalStyle />
