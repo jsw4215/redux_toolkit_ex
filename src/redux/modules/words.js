@@ -8,12 +8,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase";
-import { createAction, createReducer } from "@reduxjs/toolkit";
-
-const loadWords = createAction("LOAD");
-const createWord = createAction("CREATE");
-const updateWord = createAction("UPDATE");
-const deleteWord = createAction("DELETE");
+import { createSlice } from "@reduxjs/toolkit";
 
 export const loadWordsFB = () => {
   return async (dispatch) => {
@@ -23,7 +18,7 @@ export const loadWordsFB = () => {
       newWords.push({ id: word.id, ...word.data() });
     });
     newWords.sort((a, b) => a.timeStamp > b.timeStamp);
-    dispatch(loadWords(newWords));
+    dispatch(words.actions.load(newWords));
   };
 };
 
@@ -32,7 +27,7 @@ export const createWordFB = (word) => {
     const dbRef = await addDoc(collection(db, "words"), word);
     const _newWord = await getDoc(dbRef);
     const newWord = { id: _newWord.id, ..._newWord.data() };
-    dispatch(createWord(newWord));
+    dispatch(words.actions.create(newWord));
   };
 };
 
@@ -40,7 +35,7 @@ export const updateWordFB = (word) => {
   return async (dispatch) => {
     const dbRef = await doc(db, "words", word.id);
     await updateDoc(dbRef, word);
-    dispatch(updateWord(word));
+    dispatch(words.actions.update(word));
   };
 };
 
@@ -48,18 +43,23 @@ export const deleteWordFB = (id) => {
   return async (dispatch) => {
     const dbRef = await doc(db, "words", id);
     await deleteDoc(dbRef);
-    dispatch(deleteWord(id));
+    dispatch(words.actions.delete(id));
   };
 };
 
-const reducer = createReducer([], {
-  [loadWords]: (state, action) => action.payload,
-  [createWord]: (state, action) => [...state, action.payload],
-  [updateWord]: (state, action) =>
-    state.map((word) =>
-      word.id === action.payload.id ? action.payload : word
-    ),
-  [deleteWord]: (state, action) =>
-    state.filter((word) => word.id !== action.payload),
+export const words = createSlice({
+  name: "wordsReducer",
+  initialState: [],
+  reducers: {
+    load: (state, action) => action.payload,
+    create: (state, action) => {
+      state.push(action.payload);
+    },
+    update: (state, action) =>
+      state.map((word) =>
+        word.id === action.payload.id ? action.payload : word
+      ),
+    delete: (state, action) =>
+      state.filter((word) => word.id !== action.payload),
+  },
 });
-export default reducer;
