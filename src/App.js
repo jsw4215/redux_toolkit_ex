@@ -1,13 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadFB, loadWordsFB } from "./redux/modules/words";
+import { loadFB } from "./redux/modules/words";
 import AddWord from "./components/AddWord";
 import List from "./components/List";
 import UpdateWord from "./components/UpdateWord";
 import styled from "styled-components";
 import reset from "styled-reset";
 import { createGlobalStyle } from "styled-components";
+
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -18,6 +19,20 @@ const GlobalStyle = createGlobalStyle`
     background-color: #eee;
   }
 `;
+
+const Loading = styled.h1`
+  position: fixed;
+  top: -50px;
+  left: 0;
+  width: 100vw;
+  height: 120vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eee;
+  color: #999;
+  font-size: 50px;
+`
 
 const StyledApp = styled.div`
   padding: 50px;
@@ -39,7 +54,7 @@ function App() {
   }, [dispatch]);
   const data = useSelector((state) => state.words.status);
   if (data === 'loading') {
-    return <h1>Loading</h1>
+    return <Loading>Loading...</Loading>
   }
   return (
     <>
