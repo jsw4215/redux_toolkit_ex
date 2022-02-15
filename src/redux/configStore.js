@@ -1,11 +1,6 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import {words} from "./modules/words";
+import { configureStore } from "@reduxjs/toolkit";
+import words from "./modules/words";
 
-const middlewares = [thunk];
-const rootReducer = combineReducers({ words: words.reducer });
-const enhancer = applyMiddleware(...middlewares);
-
-const store = createStore(rootReducer, enhancer);
+const store = configureStore({ reducer: {words} });
 
 export default store;

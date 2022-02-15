@@ -47,7 +47,7 @@ export const deleteWordFB = (id) => {
   };
 };
 
-export const words = createSlice({
+const words = createSlice({
   name: "wordsReducer",
   initialState: [],
   reducers: {
@@ -63,3 +63,5 @@ export const words = createSlice({
       state.filter((word) => word.id !== action.payload),
   },
 });
+
+export default words.reducer;
