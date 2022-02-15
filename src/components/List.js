@@ -14,6 +14,8 @@ const StyledLink = styled(Link)`
   height: 90px;
   box-shadow:10px 10px 10px #ccc;
   text-decoration: none;
+  background-color: #fff;
+  z-index: 999;
   color: #ddd;
   font-size: 80px;
   transition: .2s;

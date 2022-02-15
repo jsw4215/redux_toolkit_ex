@@ -9,12 +9,14 @@ const StyledCard = styled.div`
   box-shadow: 10px 10px 10px #ccc;
   padding: 50px;
   width: 50%;
+  min-width: 650px;
   height: 200px;
   margin: 0 auto 50px;
+  background-color: #fff;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   .updateBtn,
   .deleteBtn {
     position: absolute;
@@ -37,7 +39,9 @@ const StyledCard = styled.div`
 
 const Word = styled.h4`
   font-size: 35px;
+  text-align: center;
   color: #888;
+  width: 40%;
 `;
 
 const Discription = styled.div`
@@ -46,6 +50,7 @@ const Discription = styled.div`
   flex-direction: column;
   justify-content: space-around;
   font-size: 20px;
+  flex: 1;
 `;
 
 const Meaning = styled.h4`

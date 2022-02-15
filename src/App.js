@@ -14,8 +14,8 @@ const GlobalStyle = createGlobalStyle`
 
   html, body {
     height: 100%;
-    /* background-color: red; */
     font-family: 'Noto Sans KR', sans-serif;
+    background-color: #eee;
   }
 `;
 
@@ -24,11 +24,12 @@ const StyledApp = styled.div`
 `;
 
 const Header = styled.h1`
-  padding: 50px 450px 20px;
-  font-size: 40px;
+  margin-left: 30%;
+  font-size: 45px;
   font-weight: bold;
-  color: #777;
-  margin-bottom: 50px;
+  color: #999;
+  margin-top: 20px;
+  margin-bottom: 80px;
 `;
 
 function App() {

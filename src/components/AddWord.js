@@ -32,6 +32,7 @@ const Input = styled.input`
   font-size: 20px;
   color: #333;
   text-align: center;
+  transition: .2s;
   &:focus {
     border: 2px solid #333;
   }
@@ -47,14 +48,15 @@ const Button = styled.button`
   color: #fff;
   font-size: 20px;
   margin-bottom: 40px;
-  background-color: #ddd;
+  background-color: #888;
+  transition: .2s;
   cursor: pointer;
   &:hover {
-    background-color: #eee;
-    color: #ccc;
+    background-color: #aaa;
+    color: #777;
   }
   &:active {
-    background-color: #ccc;
+    background-color: #777;
     color: #fff;
   }
 `;
