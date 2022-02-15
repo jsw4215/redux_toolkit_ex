@@ -52,23 +52,14 @@ export const deleteWordFB = (id) => {
   };
 };
 
-export default function reducer(state = [], action = {}) {
-  switch (action.type) {
-    case loadWords.type:
-      return action.payload;
-
-    case createWord.type:
-      return [...state, action.payload];
-
-    case updateWord.type:
-      return state.map((word) =>
-        word.id === action.payload.id ? action.payload : word
-      );
-
-    case deleteWord.type:
-      return state.filter((word) => word.id !== action.payload);
-
-    default:
-      return state;
-  }
-}
+const reducer = createReducer([], {
+  [loadWords]: (state, action) => action.payload,
+  [createWord]: (state, action) => [...state, action.payload],
+  [updateWord]: (state, action) =>
+    state.map((word) =>
+      word.id === action.payload.id ? action.payload : word
+    ),
+  [deleteWord]: (state, action) =>
+    state.filter((word) => word.id !== action.payload),
+});
+export default reducer;
