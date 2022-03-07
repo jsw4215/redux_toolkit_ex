@@ -6,6 +6,7 @@ import {
   doc,
   deleteDoc,
   updateDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
